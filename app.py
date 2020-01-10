@@ -10,9 +10,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 
 # Note: You need to change this $pyPlayHomeDirectory$ to your Compass Project "music test 3 "'s directory.
-pyPlayHomeDirectory = '/Users/wangmeng/Projects/lab/python/audioMix2'
+MusicTest3Directory = '/Users/wangmeng/Projects/lab/python/audioMix2'
 
-py2PlayMusicshell = "./venv/bin/python ./mix_audio.py"
+PlayShell = "./venv/bin/python ./mix_audio.py"
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -36,8 +36,8 @@ def play():
         data2 = json.loads(data)
         print(data2['notes'])
 
-        os.chdir(pyPlayHomeDirectory)
-        os.system(py2PlayMusicshell + " \"" + data2['notes'] + "\"")
+        os.chdir(MusicTest3Directory)
+        os.system(PlayShell + " \"" + data2['notes'] + "\"")
         return "sucess"
 
 
