@@ -93,12 +93,12 @@
     <h1>Song</h1>
     <h2><span class="timespan" id="timespan"></span></h2>
     <div class="btn">
-        <input onclick="startRecording()" id="ly" type="button" value="rec"/>
+        <input onclick="startRecording()" id="ly" type="button" value="Rec"/>
         <!-- <input onclick="stopRecording()" id="stop" type="button" value="停止" /> -->
         <!--<input onclick="uploadAudio()" id="commit" type="button" value="提交录音并谱曲" />-->
-        <input onclick="reset()" id="reset" type="button" value="reset"/>
+        <input onclick="reset()" id="reset" type="button" value="Reset"/>
 
-        <input onclick="play()" id="play" type="button" value="play">
+        <input onclick="play()" id="play" type="button" value="Rlay">
     </div>
     <div class="audio">
         <audio controls></audio>
@@ -250,7 +250,7 @@
 
     // 重新录制
     function reset() {
-        if (confirm("确认重新录制吗？")) {
+        if (confirm("Recoding again？")) {
             init();
         }
     }
@@ -272,9 +272,9 @@
 
             data: JSON.stringify(data),
             success: function (data) {
-                alert("上传成功");
+                {#alert("上传成功");#}
             }, error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("失败！");
+                alert("Opps！");
             }
         });
 
