@@ -71,4 +71,4 @@ def doScore():
     return notes
 
 
-print(doScore())
+# print(doScore())

@@ -1,0 +1,72 @@
+import sys
+
+import norepeatmusictheory
+
+source = "3.0|D-4, 3.75|E-4, 4.0|F-4, 5.75|G-4, 7.25|A-4, 8.0|N, 8.5|C-4, 12|N, 13.25|C-4, 16.0|N, " \
+         "17.75|C-4, 20.0|N, 22.0|C-4, 24.0|N, 26.5|C-4, 28.0|N, 31.0|C-4, 32.0|C-5"
+
+durationsSample = [0.0, 3.0, 3.75, 4.0, 5.75, 7.25, [8.0, 'None'], 8.5, [12.0, 'None'], 13.25, [16.0, 'None'], 17.75,
+                   [20.0, 'None'], 22.0, [24.0, 'None'], 26.5, [28.0, 'None'], 31.0, 32.0]
+notesSample = ['D-4', 'E-4', 'F-4', 'G-4', 'A-4', 'C-4', 'C-4', 'C-4', 'C-4', 'C-4', 'C-4', 'C-5']
+
+# [None, [[[0.0, 3.0, ['D-4']], [3.0, 0.75, ['E-4']], [3.75, 0.25, ['F-4']]], [[0.0, 1.75, ['G-4']],     4
+# [1.75, 1.5, ['A-4']], [3.25, 0.75, ['C-4']]], [[0.0, 0.5, None], [0.5, 3.5, ['C-4']]], [[0.0, 1.25, None],
+# [1.25, 2.75, ['C-4']]], [[0.0, 1.75, None], [1.75, 2.25, ['C-4']]], [[0.0, 2.0, None], [2.0, 2.0, ['C-4']]],
+# [[0.0, 2.5, None], [2.5, 1.5, ['C-4']]], [[0.0, 3.0, None], [3.0, 1.0, ['C-5']]]]]
+
+downbeatrequired = 2
+possiblenote = ["C", "D", "E", "F", "G", "A", "B"]
+
+
+def dealSource(source):
+    src_str = source.replace('\'', '').replace('[', '').replace(']', '').replace(' ', '')
+    notesList = src_str.split(',')
+
+    durations = []
+    notes = []
+    summaryBeats = 0
+    durations.append(0.00)
+    for noteStr in notesList:
+        pair = noteStr.split('|')
+        notes.append(pair[0])
+        durations.append((float)(pair[1]))
+
+    return notes, durations
+
+
+def playMixedMusic(notes, durations):
+    noterounds = 0
+    timerounds = 0
+    downbettomt = []
+    listttomt = []
+
+    print durations
+    print notes
+
+    for times in durations:
+        if type(times) == float:
+            if times != 32.0:
+                if type(durations[timerounds + 1]) != list:
+                    listttomt.append([times, durations[timerounds + 1] - times, notes[noterounds]])
+                else:
+                    listttomt.append([times, durations[timerounds + 1][0] - times, notes[noterounds]])
+                timerounds += 1
+                noterounds += 1
+            else:
+                continue
+        else:
+            if times != [32.0, "None"]:
+                if type(durations[timerounds + 1]) != list:
+                    listttomt.append([times[0], durations[timerounds + 1] - times[0], times[1]])
+                else:
+                    listttomt.append([times[0], durations[timerounds + 1][0] - times[0], times[1]])
+                timerounds += 1
+    print listttomt
+    print downbettomt
+
+    norepeatmusictheory.determinelefthand(listttomt, downbettomt)
+
+
+notes, durations = dealSource(sys.argv[1])
+
+playMixedMusic(notes, durations)
