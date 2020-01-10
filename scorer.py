@@ -1,13 +1,9 @@
 # coding=utf-8
 import os
-import string
 
-import matplotlib.pyplot as plt
 import librosa
 import librosa.display
 import librosa.util
-import numpy as np
-import pandas as pd
 
 totail_beats = 32
 number_notes = 24
@@ -70,5 +66,4 @@ def doScore():
 
     return notes
 
-
-print(doScore())
+# print(doScore())
