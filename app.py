@@ -11,8 +11,12 @@ app.config['SECRET_KEY'] = 'secret!'
 
 # Note: You need to change this $pyPlayHomeDirectory$ to your Compass Project "music test 3 "'s directory.
 MusicTest3Directory = '/Users/wangmeng/Projects/lab/python/audioMix2'
-
 PlayShell = "./venv/bin/python ./mix_audio.py"
+
+
+# windows cmd.
+# MusicTest3Directory = 'D:\\MusicTest3D'
+# PlayShell = ".\venv\Scripts\python.exe .\mix_audio.py"
 
 
 @app.route('/', methods=['GET', 'POST'])
